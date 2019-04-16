@@ -1,0 +1,40 @@
+body{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+.container{
+	position:absolute;
+	background:inherit;
+	top:50%;
+	left:50%;
+	transform: translate(-50%, -50%);
+	height:400px;
+	padding:0;
+}
+.login{
+	display:flex;
+	width:100%;
+	justify-content: space-between;
+	align-items: flex-start;
+}
+.aside{
+	width: 50%;
+	background: #f1f1f1;
+	padding:15px;
+	margin: 0 auto;
+	border-top:2px solid red;
+}
+.aside h1{
+	text-align: center;
+}
+.aside button{
+	width:100%;
+	display:block;
+	border:none;
+	color:black;
+	font-size:20px;
+	padding:5px 0;
+	background:white;
+	border-left: 5px solid red;
+}
