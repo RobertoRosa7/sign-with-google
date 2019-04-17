@@ -38,3 +38,8 @@ body{
 	background:white;
 	border-left: 5px solid red;
 }
+@media screen and (max-width:768.99px){
+	.aside{
+		width:100%;
+	}
+}
