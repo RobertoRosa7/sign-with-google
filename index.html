@@ -19,39 +19,76 @@
 
 	<!-- Comment out (or don't include) services that you don't want to use -->
 	<!-- <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-storage.js"></script> -->
-
-	<script>
-	var config = {
-		// ...
-		apiKey: "AIzaSyAcyH79cIXtoN8P7__oaYaHj6AIxAZpx-s",
-		authDomain: "reddit-clone-63507.firebaseapp.com",
-		databaseURL: "https://reddit-clone-63507.firebaseio.com",
-		projectId: "reddit-clone-63507",
-		storageBucket: "reddit-clone-63507.appspot.com",
-		messagingSenderId: "838728264899"
-	};
-	firebase.initializeApp(config);
-
-	async function start(){
-		const provider = new firebase.auth.GoogleAuthProvider();
-		const result = await firebase.auth().signInWithPopup(provider);
-		console.log(result.user);
-	}
-
-	</script>
 	<title>Sign Up with Google</title>
 </head>
 <body>
 	<main class="container">
-		<section class="login">
+		<section class="login" id="login">
 				<h1>Welcome to My Awesome App</h1>
 			<div class="aside">
 				<h1>Login with Google</h1>
-				<button id="initAuth" onclick="start()">Login</button>
+				<button id="initAuth" onclick="init()">Login</button>
+			</div>
+		</section>
+
+		<section class="login" id="logged">
+			<h1 id="title"></h1>
+			<div class="aside">
+				<img id="img">
+			</div>
+			<div class="aside">
+				<h1>Logout</h1>
+				<button id="Out" onclick="logout()">Sair</button>
 			</div>
 		</section>
 	</main>
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script> -->
 </body>
+<script>
+		const config = {
+			apiKey: "AIzaSyAcyH79cIXtoN8P7__oaYaHj6AIxAZpx-s",
+			authDomain: "reddit-clone-63507.firebaseapp.com",
+			databaseURL: "https://reddit-clone-63507.firebaseio.com",
+			projectId: "reddit-clone-63507",
+			storageBucket: "reddit-clone-63507.appspot.com",
+			messagingSenderId: "838728264899"
+		};
+		firebase.initializeApp(config);
+
+		const sessionUser = localStorage.getItem('user') || {};
+		document.querySelector('#logged').style.display = 'none';
+
+		if(sessionUser){
+			const user = JSON.parse(sessionUser);
+			document.querySelector('#login').style.display = 'none';
+			document.querySelector('#logged').style.display = 'block';
+			document.querySelector('#img').src = user.image;
+			document.querySelector('#title').innerHTML = `Welcome ${user.name}`;
+		}else{
+			document.querySelector('#login').style.display = 'block';
+			document.querySelector('#logged').style.display = 'none';
+		}
+		
+		async function init(){
+			await start();
+			window.location.reload();
+		}
+		function logout(){
+			localStorage.removeItem('user');
+			window.location.reload();
+		}
+		async function start(){
+			const provider = new firebase.auth.GoogleAuthProvider();
+			const profile = await firebase.auth().signInWithPopup(provider);
+			const { user } = profile;
+			const data = {
+				id: user.uid,
+				name: user.displayName,
+				image: user.photoURL,
+			}
+			localStorage.setItem('user', JSON.stringify(data));
+		}
+		session();
+	</script>
 </html>
