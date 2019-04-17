@@ -1,0 +1,23 @@
+{
+  "name": "sign-with-google",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RobertoRosa7/sign-with-google.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RobertoRosa7/sign-with-google/issues"
+  },
+  "homepage": "https://github.com/RobertoRosa7/sign-with-google#readme",
+  "dependencies": {
+    "firebase": "^5.9.4"
+  }
+}
